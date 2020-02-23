@@ -1,6 +1,17 @@
 # Its the representation state of the game
 # using as a model to be called.
 module Model
+
+    # Adding directions to the snake
+    module Direction
+        UP = :up
+        RIGHT = :right
+        LEFT = :left
+        DOWN = :down
+
+    end
+
+    
     # set the arguments needed to Coordenades
     class Coord < Struct.new(:row, :col)
     end
@@ -18,7 +29,7 @@ module Model
     end
 
     # define the state for the snake
-    class State < Struct.new(:snake, :food, :grid)
+    class State < Struct.new(:snake, :food, :grid, :next_direction)
     end
 
     # set the initial state for the snake
@@ -31,7 +42,8 @@ module Model
                 ]),
             # call and set the coord for the food
             Model::Food.new(4, 4),
-            Model::Grid.new(9, 12)
+            Model::Grid.new(9, 12),
+            Direction::DOWN
         )
     end
 
