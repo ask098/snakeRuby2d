@@ -29,7 +29,7 @@ module Model
     end
 
     # define the state for the snake
-    class State < Struct.new(:snake, :food, :grid, :next_direction)
+    class State < Struct.new(:snake, :food, :grid, :next_direction, :game_finished)
     end
 
     # set the initial state for the snake
@@ -43,7 +43,8 @@ module Model
             # call and set the coord for the food
             Model::Food.new(4, 4),
             Model::Grid.new(9, 12),
-            Direction::DOWN
+            Direction::DOWN,
+            false
         )
     end
 
