@@ -4,7 +4,7 @@ module  Actions
         next_position = calc_next_position(state)
         # verificar que la siguiente casilla sea valida
         if position_is_valid(state, next_position)
-            move_snake _to(next_position)
+            move_snake_to(state, next_position)
 
         else
             end_game(state)
@@ -15,48 +15,45 @@ module  Actions
 
     private
 
-    def calc_next_position(state)
+    def self.calc_next_position(state)
         curr_position = state.snake.positions.first
         case state.next_direction
-        when UP 
+        when Model::Direction::UP 
             # decrementar fila
-            return = Model::Coord.new(
-                curr_position.row -1,
+            return Model::Coord.new(
+                curr_position.row - 1,
                 curr_position.col)
-        when RIGHT
+        when Model::Direction::RIGHT
             # incrementar la col
-            return = Model::Coord.new(
+            return Model::Coord.new(
                 curr_position.row,
-                curr_position.col +1)
-        when LEFT
+                curr_position.col + 1)
+        when Model::Direction::LEFT
             # decrementar la col
-            return = Model::Coord.new(
+            return Model::Coord.new(
                 curr_position.row,
-                curr_position.col -1)
-        when DOWN
+                curr_position.col - 1)
+        when Model::Direction::DOWN
             # ingrementar la fila
-            return = Model::Coord.new(
-                curr_position.row +1,
+            return Model::Coord.new(
+                curr_position.row + 1,
                 curr_position.col)
         end
             
     end
 
-    def position_is_valid(state, position)
+    def self.position_is_valid(state, position)
         # verificar que este en la grilla
-        is_invalid = ((position.row  >= state.grid.rows ||
-            position.row < 0) ||
-            (position.col  >= state.grid.cols ||
-            position.row < 0))
+        is_invalid = ((position.row >= state.grid.row ||
+            position.row < 0) || 
+            (position.col >= state.grid.col ||
+            position.col < 0))
         return false if is_invalid
-
         # verificar que no este superponiendi a la serpiente
-
         return !(state.snake.positions.include? position)
-
     end
 
-    def move_snake _to(state, next_position)
+    def self.move_snake_to(state, next_position)
         # [0...-1] rango no inclusivo para eliminar la ultima posicion de la serpiente
         new_positions = [next_position] + state.snake.positions[0...-1]
         state.snake.positions = new_positions
@@ -64,15 +61,9 @@ module  Actions
         state
     end
 
-    def end_game(state)
+    def self.end_game(state)
         state.game_finished = true
         # por convencion se debe retornar estado
         state
     end
-    
-    
-    
 end
-
-
-

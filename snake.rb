@@ -14,4 +14,3 @@ s.color = 'red'
 
 # Show the window
 show
-# 6XJDQ24E4P  
