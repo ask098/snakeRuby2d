@@ -13,7 +13,7 @@ module View
             set(
                 title: "Snake",
                 with: @pixel_size * state.grid.col,
-                height:@pixel_size * state.grid.row)
+                height:@pixel_size * state.grid.row)                
             show
         end
 
@@ -41,7 +41,7 @@ module View
             @snake_positions.each(&:remove) if @snake_positions
             extend Ruby2D::DSL
             snake = state.snake
-            @snake_positions = snake.positions.each do |pos|
+            @snake_positions = snake.positions.map do |pos|
                 Square.new(
                     x: pos.col * @pixel_size,
                     y: pos.row * @pixel_size,
