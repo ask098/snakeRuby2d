@@ -8,9 +8,7 @@ module Model
         RIGHT = :right
         LEFT = :left
         DOWN = :down
-
     end
-
     
     # set the arguments needed to Coordenades
     class Coord < Struct.new(:row, :col)
@@ -47,5 +45,4 @@ module Model
             false
         )
     end
-
 end
